@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 44e3c37ff553b6e49a596c516e2c04c6
+timeCreated: 1485282219
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: GardenTwoThirds
+  fontNames:
+  - GardenTwoThirds
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8ed9450270a14cc4fae8ba42233f7c50
+timeCreated: 1485282027
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DekoDisplaySerial
+  fontNames:
+  - DekoDisplaySerial
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

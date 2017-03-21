@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e2bb3f9b1b89ee1479513395094409d6
+timeCreated: 1485282027
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Wars of Asgard
+  fontNames:
+  - Wars of Asgard
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
