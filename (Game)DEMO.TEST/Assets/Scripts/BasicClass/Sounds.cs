@@ -148,6 +148,16 @@ class ButtonClickSound
         ButtonClick.mute = false;
     }
 
+    public void changeVolume(float level)
+    {
+       
+        ButtonClick.volume = level;
+    }
+
+    public float getVolumeLevel()
+    {
+        return ButtonClick.volume;
+    }
 }
 /*
  * This class for music which playing in main menu
@@ -219,4 +229,18 @@ class MenuMusic
         if (mute) return true;
         else return false;
     }
+
+    public void changeVolume(float level)
+    {
+        
+            
+       
+            MainMusic.volume = level;
+    }
+
+    public float getVolumeLevel()
+    {
+        return MainMusic.volume;
+    }
+
 }
