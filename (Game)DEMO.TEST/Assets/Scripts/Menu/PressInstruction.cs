@@ -8,5 +8,6 @@ public class PressInstruction : MonoBehaviour {
     public void OnMouseDown()
     {
         SceneManager.LoadScene("Instruction");
+        
     }
 }

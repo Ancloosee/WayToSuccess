@@ -52,9 +52,6 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
@@ -70,9 +67,6 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.VR">
       <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
     </Reference>
@@ -86,7 +80,10 @@
     <Compile Include="Assets\Scripts\BasicClass\Player.cs" />
     <Compile Include="Assets\Scripts\BasicClass\Sounds.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\Animations.cs" />
+    <Compile Include="Assets\Scripts\HelpClasses\BeginAnimationInMylSet.cs" />
+    <Compile Include="Assets\Scripts\HelpClasses\ChangeText.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\DontDestroy.cs" />
+    <Compile Include="Assets\Scripts\HelpClasses\InitialisationPlayers.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\PlayMainMusic.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\changeNumberOfPlayers.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\changeNumberOfPlayersLess.cs" />
@@ -94,6 +91,7 @@
     <Compile Include="Assets\Scripts\Menu\KeyPress.cs" />
     <Compile Include="Assets\Scripts\Menu\PressExit.cs" />
     <Compile Include="Assets\Scripts\Menu\PressInstruction.cs" />
+    <Compile Include="Assets\Scripts\Menu\PressMultiPlayer.cs" />
     <Compile Include="Assets\Scripts\Menu\PressPlay.cs" />
     <Compile Include="Assets\Scripts\Menu\PressSetting.cs" />
     <Compile Include="Assets\Scripts\Settings.cs" />

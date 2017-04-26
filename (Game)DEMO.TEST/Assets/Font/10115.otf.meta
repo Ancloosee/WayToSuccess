@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 88eae22108cede748b0236ddb60e6f6b
+timeCreated: 1493147012
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Chocolate cyr-lat
+  fontNames:
+  - Chocolate cyr-lat
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

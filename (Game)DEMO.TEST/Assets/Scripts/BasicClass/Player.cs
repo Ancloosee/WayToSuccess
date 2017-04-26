@@ -5,22 +5,11 @@ using UnityEngine;
 
 abstract public class Player
 {
-    private string namePlayer;
-    private string colorplayer;
-    private int moneyPlayer;
+    public string namePlayer { set; get; }
+    public string colorplayer { set; get; }
+    public int moneyPlayer { set; get; }
 
-    public void setNamePlayer(string name)
-    {
-        this.namePlayer = name;
-    }
-    public void setColorPlayer(string color)
-    {
-        this.colorplayer = color;
-    }
-    public void setMoneyPlayer(int money)
-    {
-        this.moneyPlayer = money;
-    }
+
     abstract public void makeMove();
    
 	

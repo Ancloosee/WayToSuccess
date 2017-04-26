@@ -42,6 +42,24 @@ public class Game
         return numberOfPlayers;
     }
 
+    public void setNumberOfPlayer()
+    {
+        players = new Player[numberOfPlayers];
+    }
+
+    public  Player this[int index]
+    {
+        set
+        {
+            players[index] = value;
+        }
+        get
+        {
+            return players[index];
+        }
+    }
+       
+
 
 
     
