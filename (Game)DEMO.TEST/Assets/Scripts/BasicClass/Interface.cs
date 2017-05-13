@@ -139,8 +139,62 @@ public class Interface
         }
     }
 
-    
+    public void changeScaleOfButton(UnityEngine.UI.Button button,bool flag)
+    {
+        if(flag)
+        button.transform.localScale = new Vector2(button.transform.localScale.x + 0.5f, button.transform.localScale.y + 0.5f);
+        else
+            button.transform.localScale = new Vector2(button.transform.localScale.x - 0.5f, button.transform.localScale.y - 0.5f);
+    }
+    //for chek scale of button
+    //return true if scale is increased
+    //if scale is no increased return false
+    public bool chekScaleColorBatton(UnityEngine.UI.Button button)
+    {
+        if (button.transform.localScale.x > 1 && button.transform.localScale.y > 1)
+            return true;
+        return false;
+    }
+    public void resetScaleButton(List<UnityEngine.UI.Button> list)
+    {
+        foreach(UnityEngine.UI.Button button in list)
+        {
+            if(chekScaleColorBatton(button))
+            {
+                changeScaleOfButton(button, false);
+            }
+        }
+    }
 
-    
+    public void rotationButton(string button,bool flag)
+    {
+        if (flag)
+        GameObject.Find(button).GetComponent<RectTransform>().transform.rotation = Quaternion.Euler(0, 0, 90);
+        else
+            GameObject.Find(button).GetComponent<RectTransform>().transform.rotation = Quaternion.Euler(0, 0, 0);
+
+    }
+    public void ShowCloseMassageBox(bool flag, string str = " ")
+    {
+        if (flag)
+        {
+            GameObject.Find("ErrorPanel").GetComponent<UnityEngine.UI.Image>().enabled = true;
+            GameObject.Find("ButtonForError").GetComponent<UnityEngine.UI.Image>().enabled = true;
+            GameObject.Find("ButtonForError").GetComponent<UnityEngine.UI.Button>().enabled = true;
+            GameObject.Find("TextButtonForError").GetComponent<UnityEngine.UI.Text>().enabled = true;
+            GameObject.Find("ErrorText").GetComponent<UnityEngine.UI.Text>().enabled = true;
+            GameObject.Find("ErrorText").GetComponent<UnityEngine.UI.Text>().text = str;
+        }
+        else
+        {
+            GameObject.Find("ErrorPanel").GetComponent<UnityEngine.UI.Image>().enabled = false;
+            GameObject.Find("ButtonForError").GetComponent<UnityEngine.UI.Image>().enabled = false;
+            GameObject.Find("ButtonForError").GetComponent<UnityEngine.UI.Button>().enabled = false;
+            GameObject.Find("TextButtonForError").GetComponent<UnityEngine.UI.Text>().enabled = false;
+            GameObject.Find("ErrorText").GetComponent<UnityEngine.UI.Text>().enabled = false;
+
+        }
+
+    }
 
 }

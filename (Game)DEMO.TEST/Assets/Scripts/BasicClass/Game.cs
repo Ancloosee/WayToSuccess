@@ -8,7 +8,7 @@ public class Game
     //for save number of player in Game
     private int numberOfPlayers;
 
-    private Player[] players;
+    private List<Player> players;
     static private Game game;
 
     static public Game getGame()
@@ -44,17 +44,26 @@ public class Game
 
     public void setNumberOfPlayer()
     {
-        players = new Player[numberOfPlayers];
+        
+            players = new List<Player>(numberOfPlayers);
+        for(int i=0;i<numberOfPlayers;i++)
+        players.Add(new RealPlayer());
+        Debug.Log("Count of players: " + numberOfPlayers);
+        Debug.Log("ListLengs: " + players.Count);
+
     }
 
     public  Player this[int index]
     {
+       
         set
         {
+           // Debug.Log("Imput Index" + index);
             players[index] = value;
         }
         get
         {
+           // Debug.Log("Imput Index" + index);
             return players[index];
         }
     }

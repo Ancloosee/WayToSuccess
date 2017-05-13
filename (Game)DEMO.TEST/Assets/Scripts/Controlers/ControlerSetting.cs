@@ -9,16 +9,16 @@ public class ControlerSetting : MonoBehaviour {
    
     void Start ()
     {
-        if (!MenuMusic.GetMainMusic().is_mute())
-        {
-            GameObject.Find("BMuteOn").GetComponent<Image>().enabled = false;
-            GameObject.Find("BMuteOff").GetComponent<Image>().enabled = true;
-        }
-        else if (MenuMusic.GetMainMusic().is_mute())
-        {
-            GameObject.Find("BMuteOn").GetComponent<Image>().enabled = true;
-            GameObject.Find("BMuteOff").GetComponent<Image>().enabled = false;
-        }
+        //if (!MenuMusic.GetMainMusic().is_mute())
+        //{
+        //    GameObject.Find("BMuteOn").GetComponent<Image>().enabled = false;
+        //    GameObject.Find("BMuteOff").GetComponent<Image>().enabled = true;
+        //}
+        //else if (MenuMusic.GetMainMusic().is_mute())
+        //{
+        //    GameObject.Find("BMuteOn").GetComponent<Image>().enabled = true;
+        //    GameObject.Find("BMuteOff").GetComponent<Image>().enabled = false;
+        //}
 
         GameObject.Find("SliderMusic").GetComponent<Slider>().value = MenuMusic.GetMainMusic().getVolumeLevel();
         GameObject.Find("SliderSound").GetComponent<Slider>().value = ButtonClickSound.GetSounds().getVolumeLevel();
