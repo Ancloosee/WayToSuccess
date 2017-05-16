@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\Controlers\ControlerMutliplayerGame.cs" />
     <Compile Include="Assets\Scripts\Controlers\ControlerSetting.cs" />
     <Compile Include="Assets\Scripts\Controlers\ControlerVariantOfGame.cs" />
+    <Compile Include="Assets\Scripts\Controlers\MainGameControler.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\Animations.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\BeginAnimationInMylSet.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\ChangeText.cs" />
@@ -93,13 +94,6 @@
     <Compile Include="Assets\Scripts\HelpClasses\changeNumberOfPlayersLess.cs" />
     <Compile Include="Assets\Scripts\HelpClasses\changeNumberOfPlayersMore.cs" />
     <Compile Include="Assets\Scripts\Settings.cs" />
-    <Compile Include="Assets\Scripts\Settings\InitialisationsPointer.cs" />
-    <Compile Include="Assets\Scripts\Settings\MusicLeft.cs" />
-    <Compile Include="Assets\Scripts\Settings\MusicRigth.cs" />
-    <Compile Include="Assets\Scripts\Settings\Mute.cs" />
-    <Compile Include="Assets\Scripts\Settings\Return.cs" />
-    <Compile Include="Assets\Scripts\Settings\SoundLeft.cs" />
-    <Compile Include="Assets\Scripts\Settings\SoundRigth.cs" />
     <Compile Include="Assets\Se.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

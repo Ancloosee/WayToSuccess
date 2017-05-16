@@ -30,6 +30,8 @@ public class ControlerMutliplayerGame : MonoBehaviour {
 
         GameObject.Find("ButtonForError").GetComponent<Button>().onClick.AddListener(PressErrorButton);
 
+        GameObject.Find("Button").GetComponent<Button>().onClick.AddListener(Go);
+
     }
     private void Update()
     {
@@ -204,10 +206,10 @@ public class ControlerMutliplayerGame : MonoBehaviour {
         if (chek)
         {
             Game.getGame().changeNumberOfPlayersMore();
-            GameObject.Find("Number").GetComponent<Text>().text = System.Convert.ToString(Game.getGame().getNumberOfPlayers());
+            GameObject.Find("Number").GetComponent<Text>().text = System.Convert.ToString(Game.getGame().numberOfPlayers);
         }
         else
-        if (Index < Game.getGame().getNumberOfPlayers())
+        if (Index < Game.getGame().numberOfPlayers)
         {
             Index++;
 
@@ -232,7 +234,7 @@ public class ControlerMutliplayerGame : MonoBehaviour {
         if (chek)
         {
             Game.getGame().chamgeNumberOfPlayersLess();
-            GameObject.Find("Number").GetComponent<Text>().text = System.Convert.ToString(Game.getGame().getNumberOfPlayers());
+            GameObject.Find("Number").GetComponent<Text>().text = System.Convert.ToString(Game.getGame().numberOfPlayers);
         }
         else
         if (Index > 1)
@@ -268,7 +270,7 @@ public class ControlerMutliplayerGame : MonoBehaviour {
             GameObject.Find("Part2").GetComponent<Animations>().enabled = true;
             chek = false;
             Game.getGame().setNumberOfPlayer();
-            Debug.Log(Game.getGame().getNumberOfPlayers());
+            Debug.Log(Game.getGame().numberOfPlayers);
         }
         else
         {
@@ -294,7 +296,7 @@ public class ControlerMutliplayerGame : MonoBehaviour {
             Debug.Log("Money " + Game.getGame()[Index - 1].moneyPlayer);
 
             setRotateButton();
-
+            indexMore();
           //  EditorUtility.DisplayDialog("Hello", "Worls", "ok");
         }
     }
@@ -322,7 +324,7 @@ public class ControlerMutliplayerGame : MonoBehaviour {
     private bool chekSetColor(string name)
     {
         
-        for(int i=0;i<Game.getGame().getNumberOfPlayers();i++)
+        for(int i=0;i<Game.getGame().numberOfPlayers;i++)
         {
             if (Game.getGame()[i].colorplayer == name)
                 return false;
@@ -333,7 +335,7 @@ public class ControlerMutliplayerGame : MonoBehaviour {
     {
         if (name == " ")
             return false;
-        for (int i = 0; i < Game.getGame().getNumberOfPlayers(); i++)
+        for (int i = 0; i < Game.getGame().numberOfPlayers; i++)
         {
             if (Game.getGame()[i].namePlayer == name)
                 return false;
@@ -354,5 +356,11 @@ public class ControlerMutliplayerGame : MonoBehaviour {
                 Interface.GetIterface().changeScaleOfButton(b, flAG);
 
         }
+    }
+
+
+    private void Go()
+    {
+        SceneManager.LoadScene("Game");
     }
 }

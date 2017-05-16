@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class changeNumberOfPlayersMore : MonoBehaviour {
 
     
-    void OnMouseDown()
-    {
+    //void OnMouseDown()
+    //{
 
-        Game.getGame().changeNumberOfPlayersMore();
-            GameObject.Find("Number").GetComponent<Text>().text = System.Convert.ToString(Game.getGame().getNumberOfPlayers());    
-    }
+    //    Game.getGame().changeNumberOfPlayersMore();
+    //        GameObject.Find("Number").GetComponent<Text>().text = System.Convert.ToString(Game.getGame().getNumberOfPlayers());    
+    //}
 	
 	
 }

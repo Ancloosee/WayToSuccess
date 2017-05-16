@@ -9,7 +9,7 @@ public class changeNumberOfPlayersLess : MonoBehaviour {
     {
 
         Game.getGame().chamgeNumberOfPlayersLess();
-        GameObject.Find("Number").GetComponent<Text>().text = System.Convert.ToString(Game.getGame().getNumberOfPlayers());
+        GameObject.Find("Number").GetComponent<Text>().text = System.Convert.ToString(Game.getGame().numberOfPlayers);
     }
 
 
