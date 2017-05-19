@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Interface 
 {
@@ -108,5 +109,153 @@ public class Interface
         }
 
     }
+
+    /*Dynamic add players to the map
+     parent-parent gameobj
+     */
+    public void addPlayersElementsToTheBoad(GameObject parent)
+    {
+        for (int i = 0; i < Game.getGame().numberOfPlayers; i++)
+        {
+            GameObject tmpObj = new GameObject("Player" + (i + 1));
+            tmpObj.AddComponent<RectTransform>();
+            tmpObj.AddComponent<Image>();
+
+
+
+
+            //if set first playes
+            if (i == 0)
+            {
+                //set min anchor
+                tmpObj.GetComponent<RectTransform>().anchorMax = new Vector2(parent.GetComponent<RectTransform>().anchorMax.x + 0.2f,
+                                                            parent.GetComponent<RectTransform>().anchorMin.y + 0.02f);
+                //set max anchor
+                tmpObj.GetComponent<RectTransform>().anchorMin = new Vector2(parent.GetComponent<RectTransform>().anchorMin.x + 0.93f,
+                                                     parent.GetComponent<RectTransform>().anchorMin.y - 0.04f);
+            }
+            else
+            {
+                //set odd  player
+                if (i % 2 != 0)
+                {
+                    /*Change only Y coordinates*/
+
+                    //set max anchor
+                    tmpObj.GetComponent<RectTransform>().anchorMax = new Vector2(Game.getGame()[i - 1].position.anchorMax.x,
+                                                                Game.getGame()[i - 1].position.anchorMax.y + 0.07f);
+                    //set min anchor
+                    tmpObj.GetComponent<RectTransform>().anchorMin = new Vector2(Game.getGame()[i - 1].position.anchorMin.x,
+                                                         Game.getGame()[i - 1].position.anchorMax.y + 0.01f);
+                }
+                //set  even player
+                if (i % 2 == 0)
+                {
+                    /*Change only X coordinates*/
+
+                    //set max anchor
+                    tmpObj.GetComponent<RectTransform>().anchorMax = new Vector2(Game.getGame()[i - 2].position.anchorMin.x - 0.005f,
+                                                                Game.getGame()[i - 2].position.anchorMax.y);
+                    //set min anchor
+                    tmpObj.GetComponent<RectTransform>().anchorMin = new Vector2(Game.getGame()[i - 2].position.anchorMin.x - 0.05f,
+                                                         Game.getGame()[i - 2].position.anchorMin.y);
+                }
+
+            }
+            //set patern
+            tmpObj.GetComponent<RectTransform>().transform.SetParent(parent.transform);
+
+            //set scale
+            tmpObj.GetComponent<RectTransform>().transform.localScale = new Vector3(1, 1, 1);
+
+            //move to anchors
+            tmpObj.GetComponent<RectTransform>().transform.localPosition = Vector3.zero;
+            tmpObj.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            tmpObj.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+
+            Game.getGame()[i].position = tmpObj.GetComponent<RectTransform>();
+
+            LoadPlayerPicture(tmpObj, Game.getGame()[i]);
+
+
+
+
+        }
+    }
+    private void LoadPlayerPicture(GameObject obj, Player player)
+    {
+        string path = " ";
+
+        if (player.colorplayer == "RedColor") path = "RedPointer";
+        if (player.colorplayer == "YellowColor") path = "YellowPointer";
+        if (player.colorplayer == "BlueColor") path = "BluePointer";
+        if (player.colorplayer == "GreenBlueColor") path = "GreenBluePointer";
+        if (player.colorplayer == "GreenColor") path = "GreenPointer";
+        if (player.colorplayer == "VioletColor") path = "VioletPointer";
+
+        obj.GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
+    }
+
+    public void addInformationAboutPlayer()
+    {
+        for (int i = 0; i < Game.getGame().numberOfPlayers; i++)
+        {
+            GameObject tmpobj = new GameObject("InformationAboutPlayer" + (i + 1));
+
+            tmpobj.transform.SetParent(GameObject.Find("Canvas").transform);
+
+            tmpobj.AddComponent<RectTransform>();
+            tmpobj.AddComponent<Button>();
+
+            if (i == 0)
+            {
+                //set min anchor
+                tmpobj.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("ThrowCubeButton").GetComponent<RectTransform>().anchorMax.x,
+                                                            GameObject.Find("ThrowCubeButton").GetComponent<RectTransform>().anchorMin.y - 0.02f);
+                //set max anchor
+                tmpobj.GetComponent<RectTransform>().anchorMin = new Vector2(GameObject.Find("ThrowCubeButton").GetComponent<RectTransform>().anchorMin.x,
+                                                     GameObject.Find("ThrowCubeButton").GetComponent<RectTransform>().anchorMax.y - 0.2f);
+            }
+            else
+            {
+                //set min anchor
+                tmpobj.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("InformationAboutPlayer"+(i)).GetComponent<RectTransform>().anchorMax.x,
+                                                            GameObject.Find("InformationAboutPlayer" + (i)).GetComponent<RectTransform>().anchorMin.y + 0.02f);
+                //set max anchor
+                tmpobj.GetComponent<RectTransform>().anchorMin = new Vector2(GameObject.Find("InformationAboutPlayer" + (i)).GetComponent<RectTransform>().anchorMin.x,
+                                                     GameObject.Find("InformationAboutPlayer" + (i)).GetComponent<RectTransform>().anchorMax.y - 0.2f);
+            }
+            tmpobj.GetComponent<RectTransform>().transform.localPosition = Vector3.zero;
+            tmpobj.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            tmpobj.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            tmpobj.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+
+            
+            GameObject tmpText = new GameObject("InformationTextPlayer" + (i + 1));
+            tmpText.transform.SetParent(tmpobj.transform);
+            tmpText.AddComponent<RectTransform>();
+
+            tmpText.transform.SetParent(tmpobj.transform);
+            tmpText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+            tmpText.GetComponent<RectTransform>().anchorMin= new Vector2(0,0);
+            tmpText.GetComponent<RectTransform>().transform.localPosition = Vector3.zero;
+            tmpText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            tmpText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+
+
+
+            tmpText.AddComponent<Text>();
+            tmpText.GetComponent<Text>().text = Game.getGame()[i].namePlayer + "\n" + "Money: " + Game.getGame()[i].moneyPlayer;
+            tmpText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            tmpText.GetComponent<Text>().font= GameObject.Find("CubeNumber").GetComponent<Text>().font;
+
+
+            tmpText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+
+        }
+    }
+
+
+    
 
 }
