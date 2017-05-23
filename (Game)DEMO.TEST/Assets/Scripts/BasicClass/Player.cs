@@ -14,7 +14,8 @@ abstract public class Player
     public Player()
     {
         namePlayer = " ";
-        position = new RectTransform();
+        
+        RealTimePosition = 0;
 
     }
     //name of player
@@ -24,23 +25,26 @@ abstract public class Player
     //count money of player
     public int moneyPlayer { set; get; }
     //positions player
-    public RectTransform position { set; get; }
+    public GameObject LogoPlayer { set; get; }
+
+    public int RealTimePosition { set; get; }
 
     abstract public void makeMove();
    
+  
 	
 }
 
 public class RealPlayer: Player
 {
 
-    public RealPlayer():base()
+    public RealPlayer() :base()
     {
         
     }
    
     public override void makeMove()
     {
-       
+        
     }
 }

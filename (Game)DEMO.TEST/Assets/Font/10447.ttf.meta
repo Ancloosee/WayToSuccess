@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 12e85f4410882be4f8ce8cb0383d5865
+timeCreated: 1495580180
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: A&S Porkchop Primitive Cyrillic
+  fontNames:
+  - A&S Porkchop Primitive Cyrillic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

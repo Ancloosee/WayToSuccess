@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c1f03d1e1ed00304298daa427ce1b121
+timeCreated: 1495580133
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Astakhov Dished Glamour
+  fontNames:
+  - Astakhov Dished Glamour
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

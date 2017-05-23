@@ -10,7 +10,7 @@ public class ControlerMutliplayerGame : MonoBehaviour {
     public int Index { set; get; }
     string name;
     string color;
-
+    int flafGO = 0;
     List<Button> ButtonList;
     void Start()
     {
@@ -296,6 +296,9 @@ public class ControlerMutliplayerGame : MonoBehaviour {
             Debug.Log("Money " + Game.getGame()[Index - 1].moneyPlayer);
 
             setRotateButton();
+            flafGO++;
+            if (flafGO == Game.getGame().numberOfPlayers)
+                GameObject.Find("Button").GetComponent<Animations>().enabled = true;
             indexMore();
           //  EditorUtility.DisplayDialog("Hello", "Worls", "ok");
         }

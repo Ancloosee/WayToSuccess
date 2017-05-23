@@ -8,10 +8,11 @@ public class Game
 {
     //for save number of player in Game
     public int numberOfPlayers { set; get; }
-
     private List<Player> players;
-    static private Game game;
+    public int Step { get; set; }
 
+
+    static private Game game;
     static public Game getGame()
     {
         if (game == null)
@@ -43,10 +44,13 @@ public class Game
 
     public void setNumberOfPlayer()
     {
-       // numberOfPlayers = 2;
+          numberOfPlayers = 3;
+        
         players = new List<Player>(numberOfPlayers);
         for (int i = 0; i < numberOfPlayers; i++)
+        {
             players.Add(new RealPlayer());
+        }
         Debug.Log("Count of players: " + numberOfPlayers);
         Debug.Log("ListLengs: " + players.Count);
         
@@ -89,21 +93,28 @@ public class Game
 
     public void changeMainCamera(GameObject camera1,GameObject camera2)
     {
-       camera1.GetComponent<Camera>().enabled = false;
+       //camera1.GetComponent<Camera>().enabled = false;
 
-        camera2.GetComponent<Camera>().enabled = true;
-        GameObject.Find("Canvas").GetComponent<Canvas>().worldCamera = camera2.GetComponent<Camera>();
-        camera2.transform.position = new Vector3(Game.getGame()[0].position.position.x, Game.getGame()[0].position.position.y, Game.getGame()[0].position.position.z);
-        camera2.GetComponent<Camera>().farClipPlane = 10;
-        camera2.GetComponent<Camera>().backgroundColor = camera1.GetComponent<Camera>().backgroundColor;
+       // camera2.GetComponent<Camera>().enabled = true;
+       // GameObject.Find("Canvas").GetComponent<Canvas>().worldCamera = camera2.GetComponent<Camera>();
+       // camera2.transform.position = new Vector3(Game.getGame()[0].position.position.x, Game.getGame()[0].position.position.y, Game.getGame()[0].position.position.z);
+       // camera2.GetComponent<Camera>().farClipPlane = 10;
+       // camera2.GetComponent<Camera>().backgroundColor = camera1.GetComponent<Camera>().backgroundColor;
         
     }
 
     public void setFocusPlayerCamera(Player player)
     {
-        GameObject.Find("BoardCamera").GetComponent<RectTransform>().localPosition = new Vector3(player.position.localPosition.x, player.position.localPosition.y, -50);
+        //GameObject.Find("BoardCamera").GetComponent<RectTransform>().localPosition = new Vector3(player.position.localPosition.x, player.position.localPosition.y, -50);
     }
 
+
+    public void throwCube()
+    {
+        System.Random rand = new System.Random();
+        Step = rand.Next(1, 6);
+        GameObject.Find("CubeNumber").GetComponent<Text>().text = System.Convert.ToString(Step);
+    }
 
     
 }
