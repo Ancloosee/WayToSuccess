@@ -35,14 +35,18 @@ public struct Anchors
     //count players of the element
     public int Count { set; get; }
 
-   public List<GameObject> playersInTheCase { set; get; }
+    public List<GameObject> playersInTheCase { set; get; }
 
 
     public BoardProperty boardProterty { get; set; }
     public BoardCard boardCard { set; get; }
     public BoardPayOnly boardPayOnly { set; get; }
     public BoardSingleProperty boardSingleProperty { set; get; }
+
+
     public Sprite sprite { set; get; }
+
+
     public BoardElements(string name,string path,BoardProperty boardProterty = null,BoardCard boardCard = null,
         BoardPayOnly boardPayOnly = null,BoardSingleProperty boardSingleProperty = null)
     {
@@ -146,35 +150,34 @@ public class BoardCard
     public CARDTYPE Type { set; get; }
     //for save Image and ID card
  
-    public Dictionary<int,Image> Images { set; get; }
-    private Image tmpImage= GameObject.Find("NULL").GetComponent<Image>();
-
+    public KeyValuePair<int,Sprite>[] Images { set; get; }
 
     public BoardCard(CARDTYPE type)
     {
         Type = type;
-        this.Images = new Dictionary<int, Image>();
+        
 
 
         if (Type== CARDTYPE.CHANCE)
         {
             string path = @"CHANSE\";
             Sprite[] tmpList = Resources.LoadAll<Sprite>(path);
+            this.Images = new KeyValuePair<int, Sprite>[tmpList.Length];
             for (int i = 0; i < tmpList.Length; i++)
             {
-                tmpImage.sprite = tmpList[i];
-                Images.Add(i + 1, tmpImage);
+                Images[i] = new KeyValuePair<int, Sprite>(System.Convert.ToInt32(tmpList[i].name.Replace("CHANSE", "")), tmpList[i]);
+                //Images.Add(i + 1, tmpList[i]);
             }
         }
         if(Type== CARDTYPE.COMUNITY)
         {
             string path = @"Community\";
             Sprite[] tmpList = Resources.LoadAll<Sprite>(path);
-            
+            this.Images = new KeyValuePair<int, Sprite>[tmpList.Length];
             for (int i = 0; i < tmpList.Length; i++)
             {
-                tmpImage.sprite = tmpList[i];
-                Images.Add(i + 1, tmpImage);
+                Images[i] = new KeyValuePair<int, Sprite>(System.Convert.ToInt32(tmpList[i].name.Replace("CHANSE", "")), tmpList[i]);
+                //Images.Add(i + 1, tmpList[i]);
             }
         }
     }

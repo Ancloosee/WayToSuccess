@@ -246,7 +246,7 @@ public class Interface
 
 
             tmpText.AddComponent<Text>();
-            tmpText.GetComponent<Text>().text = Game.getGame()[i].namePlayer + "\n" + "Money: " + Game.getGame()[i].moneyPlayer;
+            tmpText.GetComponent<Text>().text = Game.getGame()[i].namePlayer;
             tmpText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
             tmpText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
 
@@ -263,6 +263,7 @@ public class Interface
         GameObject.Find("InformationPanelAboutPlayer").GetComponent<Animations>().speed = 5;
         GameObject.Find("InformationPanelAboutPlayer").GetComponent<Animations>().chekPos = 0;
         GameObject.Find("InformationPanelAboutPlayer").GetComponent<Animations>().enabled = true;
+        //createAllElementsOPlayerBoard(player);
         GameObject.Find("CloseButton").GetComponent<Button>().onClick.AddListener(closePanelInformation);
     }
     private void closePanelInformation()
@@ -281,7 +282,7 @@ public class Interface
         GameObject.Find("LogoBoardElements").GetComponent<Image>().sprite = elements.sprite;
 
 
-        GameObject.Find("BoardElementsCloseButton").GetComponent<Button>().onClick.AddListener(closeInformationAboutBoardElements);
+       // GameObject.Find("BoardElementsCloseButton").GetComponent<Button>().onClick.AddListener(closeInformationAboutBoardElements);
     }
     public void closeInformationAboutBoardElements()
     {
@@ -388,75 +389,110 @@ public class Interface
 
 
         /*---------------CREATE BUTTONS------------------*/
+        if (element.boardProterty.isOwner == false)
+        {
+            GameObject button = new GameObject("BoardElementBuyButton");
+            button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
+            button.AddComponent<RectTransform>();
+            button.AddComponent<Button>();
 
-        GameObject button = new GameObject("BoardElementBuyButton");
-        button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
-        button.AddComponent<RectTransform>();
-        button.AddComponent<Button>();
-        
-        //set anchors 
-        button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y-0.15f);
-        button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.3f);
-        button.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            //set anchors 
+            button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.15f);
+            button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.3f);
+            button.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
 
-        //create text for button
-        GameObject buttonText = new GameObject("BoardElementsBuyButtonText");
-        buttonText.transform.SetParent(GameObject.Find("BoardElementBuyButton").transform);
-        buttonText.AddComponent<RectTransform>();
-        buttonText.AddComponent<Text>();
-        //set achors
-        buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
-        buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        //set text
+            //create text for button
+            GameObject buttonText = new GameObject("BoardElementsBuyButtonText");
+            buttonText.transform.SetParent(GameObject.Find("BoardElementBuyButton").transform);
+            buttonText.AddComponent<RectTransform>();
+            buttonText.AddComponent<Text>();
+            //set achors
+            buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+            buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            //set text
 
-        buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
-        buttonText.GetComponent<Text>().resizeTextForBestFit = true;
-        buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-        buttonText.GetComponent<Text>().text = "Buy";
+            buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
+            buttonText.GetComponent<Text>().resizeTextForBestFit = true;
+            buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            buttonText.GetComponent<Text>().text = "Buy";
 
 
-        /*NEW BUTTON*/
-        //SkipButton
-       button = new GameObject("BoardElementSkipButton");
-        button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
-        button.AddComponent<RectTransform>();
-        button.AddComponent<Button>();
+            /*NEW BUTTON*/
+            //SkipButton
+            button = new GameObject("BoardElementSkipButton");
+            button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
+            button.AddComponent<RectTransform>();
+            button.AddComponent<Button>();
 
-        //set anchors 
-        button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y-0.15f);
-        button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y - 0.3f);
+            //set anchors 
+            button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y - 0.15f);
+            button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y - 0.3f);
 
-        button.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
 
-        //create text for button
-         buttonText = new GameObject("BoardElementSkipButton");
-        buttonText.transform.SetParent(GameObject.Find("BoardElementSkipButton").transform);
-        buttonText.AddComponent<RectTransform>();
-        buttonText.AddComponent<Text>();
-        //set achors
-        buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
-        buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        //set text
+            //create text for button
+            buttonText = new GameObject("BoardElementSkipButton");
+            buttonText.transform.SetParent(GameObject.Find("BoardElementSkipButton").transform);
+            buttonText.AddComponent<RectTransform>();
+            buttonText.AddComponent<Text>();
+            //set achors
+            buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+            buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            //set text
 
-        buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
-        buttonText.GetComponent<Text>().resizeTextForBestFit = true;
-        buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-        buttonText.GetComponent<Text>().text = "Skip";
+            buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
+            buttonText.GetComponent<Text>().resizeTextForBestFit = true;
+            buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            buttonText.GetComponent<Text>().text = "Skip";
+        }
+        else
+        {
+            GameObject button = new GameObject("BoardElementPayorUpdateButton");
+            button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
+            button.AddComponent<RectTransform>();
+            button.AddComponent<Button>();
 
+            //set anchors 
+            button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.15f);
+            button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.3f);
+            button.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+
+            //create text for button
+            GameObject buttonText = new GameObject("BoardElementsPayorUpdateButtonText");
+            buttonText.transform.SetParent(GameObject.Find("BoardElementPayorUpdateButton").transform);
+            buttonText.AddComponent<RectTransform>();
+            buttonText.AddComponent<Text>();
+            //set achors
+            buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+            buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            //set text
+
+            buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
+            buttonText.GetComponent<Text>().resizeTextForBestFit = true;
+            buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            
+        }
 
 
         
@@ -471,6 +507,8 @@ public class Interface
         try
         {
             MonoBehaviour.Destroy(GameObject.Find("BoardElementOwnerName"));
+
+            MonoBehaviour.Destroy(GameObject.Find("BoardElementPayorUpdateButton"));
         }
         catch (System.Exception ex)
         {
@@ -591,75 +629,147 @@ public class Interface
 
 
         /*---------------CREATE BUTTONS------------------*/
+        if (element.boardSingleProperty.isOwner == false)
+        {
+            GameObject button = new GameObject("BoardElementBuyButton");
+            button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
+            button.AddComponent<RectTransform>();
+            button.AddComponent<Button>();
 
-        GameObject button = new GameObject("BoardElementBuyButton");
-        button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
-        button.AddComponent<RectTransform>();
-        button.AddComponent<Button>();
+            //set anchors 
+            button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.15f);
+            button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.3f);
+            button.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
 
-        //set anchors 
-        button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.15f);
-        button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.3f);
-        button.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            //create text for button
+            GameObject buttonText = new GameObject("BoardElementsBuyButtonText");
+            buttonText.transform.SetParent(GameObject.Find("BoardElementBuyButton").transform);
+            buttonText.AddComponent<RectTransform>();
+            buttonText.AddComponent<Text>();
+            //set achors
+            buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+            buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            //set text
 
-        //create text for button
-        GameObject buttonText = new GameObject("BoardElementsBuyButtonText");
-        buttonText.transform.SetParent(GameObject.Find("BoardElementBuyButton").transform);
-        buttonText.AddComponent<RectTransform>();
-        buttonText.AddComponent<Text>();
-        //set achors
-        buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
-        buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        //set text
-
-        buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
-        buttonText.GetComponent<Text>().resizeTextForBestFit = true;
-        buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-        buttonText.GetComponent<Text>().text = "Buy";
+            buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
+            buttonText.GetComponent<Text>().resizeTextForBestFit = true;
+            buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            buttonText.GetComponent<Text>().text = "Buy";
 
 
-        /*NEW BUTTON*/
-        //SkipButton
-        button = new GameObject("BoardElementSkipButton");
-        button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
-        button.AddComponent<RectTransform>();
-        button.AddComponent<Button>();
+            /*NEW BUTTON*/
+            //SkipButton
+            button = new GameObject("BoardElementSkipButton");
+            button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
+            button.AddComponent<RectTransform>();
+            button.AddComponent<Button>();
 
-        //set anchors 
-        button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y-0.15f);
-        button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y - 0.3f);
+            //set anchors 
+            button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y - 0.15f);
+            button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y - 0.3f);
 
-        button.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
 
-        //create text for button
-        buttonText = new GameObject("BoardElementSkipButton");
-        buttonText.transform.SetParent(GameObject.Find("BoardElementSkipButton").transform);
-        buttonText.AddComponent<RectTransform>();
-        buttonText.AddComponent<Text>();
-        //set achors
-        buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
-        buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
-        buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
-        buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-        //set text
+            //create text for button
+            buttonText = new GameObject("BoardElementSkipButton");
+            buttonText.transform.SetParent(GameObject.Find("BoardElementSkipButton").transform);
+            buttonText.AddComponent<RectTransform>();
+            buttonText.AddComponent<Text>();
+            //set achors
+            buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+            buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            //set text
 
-        buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
-        buttonText.GetComponent<Text>().resizeTextForBestFit = true;
-        buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-        buttonText.GetComponent<Text>().text = "Skip";
+            buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
+            buttonText.GetComponent<Text>().resizeTextForBestFit = true;
+            buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            buttonText.GetComponent<Text>().text = "Skip";
+        }
+        else
+        {
+            GameObject button = new GameObject("BoardElementBuyButton");
+            button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
+            button.AddComponent<RectTransform>();
+            button.AddComponent<Button>();
 
+            //set anchors 
+            button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.15f);
+            button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("NameBoardElements").GetComponent<RectTransform>().anchorMin.y - 0.3f);
+            button.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+
+            //create text for button
+            GameObject buttonText = new GameObject("BoardElementsBuyButtonText");
+            buttonText.transform.SetParent(GameObject.Find("BoardElementBuyButton").transform);
+            buttonText.AddComponent<RectTransform>();
+            buttonText.AddComponent<Text>();
+            //set achors
+            buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+            buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            //set text
+
+            buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
+            buttonText.GetComponent<Text>().resizeTextForBestFit = true;
+            buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+
+            GameObject button1 = new GameObject("BoardElementSellButton");
+            button.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
+            button.AddComponent<RectTransform>();
+            button.AddComponent<Button>();
+
+            //set anchors 
+            button.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.x, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y - 0.15f);
+            button.GetComponent<RectTransform>().anchorMin = new Vector2(0, GameObject.Find("BoardElementBuyButton").GetComponent<RectTransform>().anchorMin.y - 0.3f);
+            button.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            button.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            button.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+
+            //create text for button
+            GameObject buttonTexts = new GameObject("BoardElementSellButtonText");
+            buttonText.transform.SetParent(GameObject.Find("BoardElementSellButton").transform);
+            buttonText.AddComponent<RectTransform>();
+            buttonText.AddComponent<Text>();
+            //set achors
+            buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+            buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            //set text
+
+            buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
+            buttonText.GetComponent<Text>().resizeTextForBestFit = true;
+            buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+            buttonTexts.GetComponent<Text>().text = "Sell";
+
+
+            GameObject.Find("BoardElementSellButton").GetComponent<Button>().enabled = false;
+            GameObject.Find("BoardElementSellButtonText").GetComponent<Text>().enabled = false;
+
+
+        }
     }
     private void destroySinglePropertyPanel()
     {
@@ -669,6 +779,10 @@ public class Interface
         try
         {
             MonoBehaviour.Destroy(GameObject.Find("BoardElementOwnerName"));
+
+            MonoBehaviour.Destroy(GameObject.Find("BoardElementSellButton"));
+
+            
         }
         catch (System.Exception ex)
         {
@@ -696,7 +810,7 @@ public class Interface
         button.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
 
         //create text for button
-        GameObject buttonText = new GameObject("BoardElementsBuyButtonText");
+        GameObject buttonText = new GameObject("BoardElementsTakeCardButtonText");
         buttonText.transform.SetParent(GameObject.Find("BoardElementDoButton").transform);
         buttonText.AddComponent<RectTransform>();
         buttonText.AddComponent<Text>();
@@ -712,7 +826,72 @@ public class Interface
         buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
         buttonText.GetComponent<Text>().resizeTextForBestFit = true;
         buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-        buttonText.GetComponent<Text>().text = "DO ";
+        buttonText.GetComponent<Text>().text = "Take a card";
+
+        GameObject.Find("BoardElementDoButton").GetComponent<Button>().onClick.AddListener(delegate { showRandCard(element); });
+    }
+
+    
+    public void showRandCard(BoardElements element)
+    {
+       // destroyCardPanel();
+        System.Random rand = new System.Random();
+        int randNumber = rand.Next(1, element.boardCard.Images.Length);
+        //for save anchors
+        float[] massAchors = {
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMax.x,
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMax.y,
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.x,
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin.y };
+
+        //set new positions
+        GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
+        GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+        GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().localPosition = Vector3.zero;
+        GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+        GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+
+        GameObject.Find("LogoBoardElements").GetComponent<Image>().sprite = element.boardCard.Images[randNumber].Value;
+
+       // GameObject.Find("BoardElementDoButton").GetComponent<Button>().enabled = false;
+
+        GameObject.Find("BoardElementDoButton").GetComponent<RectTransform>().anchorMax = new Vector2(1,0.3f);
+        GameObject.Find("BoardElementDoButton").GetComponent<RectTransform>().anchorMin = new Vector2(0,0.1f);
+        GameObject.Find("BoardElementDoButton").GetComponent<RectTransform>().localPosition = Vector3.zero;
+        GameObject.Find("BoardElementDoButton").GetComponent<RectTransform>().offsetMax = new Vector2(0,0);
+        GameObject.Find("BoardElementDoButton").GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+
+        GameObject.Find("BoardElementsTakeCardButtonText").GetComponent<Text>().text = "Do Action";
+
+
+        GameObject buttonText = new GameObject("BoardElementsIDCardText");
+        buttonText.transform.SetParent(GameObject.Find("BoardElementInformation").transform);
+        buttonText.AddComponent<RectTransform>();
+        buttonText.AddComponent<Text>();
+        //set achors
+        buttonText.GetComponent<RectTransform>().anchorMax = new Vector2(0.3f, 0.3f);
+        buttonText.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+        buttonText.GetComponent<RectTransform>().localPosition = Vector3.zero;
+        buttonText.GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+        buttonText.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+        buttonText.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+        //set text
+
+        buttonText.GetComponent<Text>().font = GameObject.Find("CubeNumber").GetComponent<Text>().font;
+        buttonText.GetComponent<Text>().resizeTextForBestFit = true;
+        buttonText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+        buttonText.GetComponent<Text>().text = System.Convert.ToString(element.boardCard.Images[randNumber].Key);
+
+        GameObject.Find("BoardElementDoButton").GetComponent<Button>().onClick.AddListener(() =>
+        {
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMax = new Vector2(massAchors[0], massAchors[1]);
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().anchorMin = new Vector2(massAchors[2], massAchors[3]);
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().offsetMax = new Vector2(0, 0);
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+            GameObject.Find("LogoBoardElements").GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            
+            
+        });
 
     }
 
@@ -732,7 +911,68 @@ public class Interface
 
     }
 
-    
+    public void changeTextPlayer(int index)
+    {
+
+        for (int i = 0; i < Game.getGame().numberOfPlayers; i++)
+        {
+            GameObject.Find("InformationTextPlayer" + (i + 1)).GetComponent<Text>().fontStyle = FontStyle.Normal;
+        }
+        GameObject.Find("InformationTextPlayer" + (index + 1)).GetComponent<Text>().fontStyle = FontStyle.BoldAndItalic;
+    }
+
+
+    //public void createAllElementsOPlayerBoard(Player player)
+    //{
+
+    //    for (int i = 0; i < player.PlayersElements.Count/3; i++)
+    //    {
+    //        GameObject tmpObj = new GameObject(player.PlayersElements[i].Name + "onBoard");
+    //        tmpObj.AddComponent<RectTransform>();
+    //        tmpObj.transform.SetParent(GameObject.Find("AllPlayersElementBoard").transform);
+    //        tmpObj.AddComponent<Button>();
+
+    //        //
+    //        for (int j = 0; j < 3; j++)
+    //        {
+
+
+    //            if (j == 0)
+    //            {
+    //                tmpObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.3f, 1);
+    //                tmpObj.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0.3f);
+    //            }
+    //            else if (j == 1)
+    //            {
+    //                tmpObj.GetComponent<RectTransform>().anchorMax = new Vector2(0.65f, GameObject.Find(player.PlayersElements[j - 1].Name + "onBoard").GetComponent<RectTransform>().anchorMax.y);
+    //                tmpObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.035f, GameObject.Find(player.PlayersElements[j - 1].Name + "onBoard").GetComponent<RectTransform>().anchorMin.y);
+    //            }
+    //            else if (j== 2)
+    //            {
+    //                tmpObj.GetComponent<RectTransform>().anchorMax = new Vector2(1, GameObject.Find(player.PlayersElements[j - 1].Name + "onBoard").GetComponent<RectTransform>().anchorMax.y);
+    //                tmpObj.GetComponent<RectTransform>().anchorMin = new Vector2(0.75f, GameObject.Find(player.PlayersElements[j - 1].Name + "onBoard").GetComponent<RectTransform>().anchorMin.y);
+    //                //tmpObj.GetComponent<RectTransform>().anchorMax = new Vector2(GameObject.Find(player.PlayersElements[i - 2].Name + "onBoard").GetComponent<RectTransform>().anchorMax.x, GameObject.Find(player.PlayersElements[i - 2].Name + "onBoard").GetComponent<RectTransform>().anchorMin.y + 0.2f);
+    //                //tmpObj.GetComponent<RectTransform>().anchorMin = new Vector2(GameObject.Find(player.PlayersElements[i - 2].Name + "onBoard").GetComponent<RectTransform>().anchorMin.x, GameObject.Find(player.PlayersElements[i - 2].Name + "onBoard").GetComponent<RectTransform>().anchorMin.y + 0.05f);
+    //            }
+
+    //            tmpObj.GetComponent<RectTransform>().localPosition = Vector3.zero;
+    //            tmpObj.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+    //            tmpObj.GetComponent<RectTransform>().offsetMax = Vector2.zero;
+    //            tmpObj.GetComponent<RectTransform>().offsetMin = Vector2.zero;
+
+    //            tmpObj.AddComponent<Image>();
+    //            tmpObj.GetComponent<Image>().sprite = player.PlayersElements[i].sprite;
+    //        }
+    //        }
+    //    GameObject.Find("PanelButtonSELL").GetComponent<Button>().onClick.AddListener(showAllElementsOPlayerBoard);
+    //}
+    public void showAllElementsOPlayerBoard()
+    {
+
+        GameObject.Find("AllPlayersElementBoard").GetComponent<Animations>().speed = -5;
+        GameObject.Find("AllPlayersElementBoard").GetComponent<Animations>().chekPos = 0;
+        GameObject.Find("AllPlayersElementBoard").GetComponent<Animations>().enabled = true;
+    }
 }
 
 

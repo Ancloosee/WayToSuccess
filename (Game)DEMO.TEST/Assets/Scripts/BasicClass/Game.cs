@@ -10,7 +10,7 @@ public class Game
     public int numberOfPlayers { set; get; }
     private List<Player> players;
     public int Step { get; set; }
-
+    public bool chekTrow { get; set; }
 
     static private Game game;
     static public Game getGame()
@@ -23,6 +23,7 @@ public class Game
     //default constructor
     private Game()
     {
+        chekTrow = true;
         numberOfPlayers = 2;
     }
 
@@ -39,7 +40,11 @@ public class Game
         if(numberOfPlayers>2)
         numberOfPlayers--;
     }
-   
+    public Player findByName(string name)
+    {
+
+        return players.Find(x => x.namePlayer == name);
+    }
 
 
     public void setNumberOfPlayer()
@@ -111,10 +116,14 @@ public class Game
 
     public void throwCube()
     {
-        System.Random rand = new System.Random();
-        Step = rand.Next(1, 6);
-        GameObject.Find("CubeNumber").GetComponent<Text>().text = System.Convert.ToString(Step);
-    }
+        if (chekTrow)
+        {
+            System.Random rand = new System.Random();
+            Step = rand.Next(1, 6);
+            GameObject.Find("CubeNumber").GetComponent<Text>().text = System.Convert.ToString(Step);
+            chekTrow = false;
+        }
+        }
 
     
 }
