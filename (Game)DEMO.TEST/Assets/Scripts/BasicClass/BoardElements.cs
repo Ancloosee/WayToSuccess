@@ -34,19 +34,12 @@ public struct Anchors
     //public Image Images { set; get; }
     //count players of the element
     public int Count { set; get; }
-
     public List<GameObject> playersInTheCase { set; get; }
-
-
     public BoardProperty boardProterty { get; set; }
     public BoardCard boardCard { set; get; }
     public BoardPayOnly boardPayOnly { set; get; }
     public BoardSingleProperty boardSingleProperty { set; get; }
-
-
     public Sprite sprite { set; get; }
-
-
     public BoardElements(string name,string path,BoardProperty boardProterty = null,BoardCard boardCard = null,
         BoardPayOnly boardPayOnly = null,BoardSingleProperty boardSingleProperty = null)
     {
@@ -65,7 +58,6 @@ public struct Anchors
         Count = 0;
       
     }
-
     public void setAnchors(float MaxX,float MaxY,float MinX,float MinY)
     {
         Positions = new Anchors(MaxX, MaxY, MinX, MinY);
@@ -117,24 +109,14 @@ public struct Anchors
 
         }
     }
-
-
-
-
 }
 
 public class BoardProperty
 {
-
-
     public int UpdateLevel { set; get; }
-
     public string OwnerName { set; get; }
-
     public bool isOwner { set; get; }
-
     public int Price { set; get; }
-
     public BoardProperty(int price)
     {
         Price = price;
@@ -149,9 +131,7 @@ public class BoardCard
     //Chanse or CommunityChest
     public CARDTYPE Type { set; get; }
     //for save Image and ID card
- 
     public KeyValuePair<int,Sprite>[] Images { set; get; }
-
     public BoardCard(CARDTYPE type)
     {
         Type = type;
@@ -186,7 +166,6 @@ public class BoardCard
 public class BoardPayOnly
 {
     public int Price { set; get; }
-
     public BoardPayOnly(int price)
     {
         Price = price;

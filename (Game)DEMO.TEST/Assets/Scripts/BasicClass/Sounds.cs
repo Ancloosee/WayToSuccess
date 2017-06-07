@@ -131,14 +131,6 @@ class ButtonClickSound
     {
         ButtonClick.Stop();
     }
-    public  void changeVolumeDown()
-    {
-        ButtonClick.volume -= 0.02f;
-    }
-    public  void changeVolumeUp()
-    {
-        ButtonClick.volume += 0.02f;
-    }
     public void setMute()
     {
         ButtonClick.mute = true;
@@ -202,15 +194,6 @@ class MenuMusic
     {
         MainMusic.Stop();
     }
-    public  void changeVolumeDown()
-    {
-        MainMusic.volume -= 0.02f;
-    }
-    public  void changeVolumeUp()
-    {
-        
-        MainMusic.volume += 0.02f;
-    }
     public void changeMute()
     {
         if (mute) mute = false;
@@ -229,7 +212,6 @@ class MenuMusic
         if (mute) return true;
         else return false;
     }
-
     public void changeVolume(float level)
     {
         
@@ -237,7 +219,6 @@ class MenuMusic
        
             MainMusic.volume = level;
     }
-
     public float getVolumeLevel()
     {
         return MainMusic.volume;

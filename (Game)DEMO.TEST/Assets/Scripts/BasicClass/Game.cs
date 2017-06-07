@@ -11,7 +11,7 @@ public class Game
     private List<Player> players;
     public int Step { get; set; }
     public bool chekTrow { get; set; }
-
+    Player winPlayer;
     static private Game game;
     static public Game getGame()
     {
@@ -45,11 +45,9 @@ public class Game
 
         return players.Find(x => x.namePlayer == name);
     }
-
-
     public void setNumberOfPlayer()
     {
-          numberOfPlayers = 3;
+          //numberOfPlayers = 3;
         
         players = new List<Player>(numberOfPlayers);
         for (int i = 0; i < numberOfPlayers; i++)
@@ -61,7 +59,6 @@ public class Game
         
 
     }
-
     public  Player this[int index]
     {
        
@@ -76,11 +73,6 @@ public class Game
             return players[index];
         }
     }
-       
-
-    
-   
-
     /*create and add camera to GameObj
     GameObject obj- parent gameobject
     */
@@ -93,9 +85,7 @@ public class Game
         camera.transform.SetParent(obj.transform);
         camera.GetComponent<Camera>().enabled = false;
     }
-
     /*For change Camera*/
-
     public void changeMainCamera(GameObject camera1,GameObject camera2)
     {
        //camera1.GetComponent<Camera>().enabled = false;
@@ -107,13 +97,10 @@ public class Game
        // camera2.GetComponent<Camera>().backgroundColor = camera1.GetComponent<Camera>().backgroundColor;
         
     }
-
     public void setFocusPlayerCamera(Player player)
     {
         //GameObject.Find("BoardCamera").GetComponent<RectTransform>().localPosition = new Vector3(player.position.localPosition.x, player.position.localPosition.y, -50);
     }
-
-
     public void throwCube()
     {
         if (chekTrow)
@@ -124,8 +111,25 @@ public class Game
             chekTrow = false;
         }
         }
-
-    
+    public void chekBanclotsPlayer()
+    {
+        foreach(Player p in this.players)
+        {
+            if(p.moneyPlayer<0)
+            {
+                players.Remove(p);
+            }
+        }
+    }
+    public bool isGameOver()
+    {
+        if(this.players.Count==1)
+        {
+            winPlayer = players[0];
+            return true;
+        }
+        return false;
+    }
 }
     
 	

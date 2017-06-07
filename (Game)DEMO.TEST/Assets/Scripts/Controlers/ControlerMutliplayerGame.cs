@@ -67,9 +67,6 @@ public class ControlerMutliplayerGame : MonoBehaviour {
             }
         }
     }
-    
-   
-    
     private void redColor()
     {
         if (!chekSetColor(ButtonList[4].name))
@@ -200,7 +197,6 @@ public class ControlerMutliplayerGame : MonoBehaviour {
         }
 
     }
-
     private void indexMore()
     {    //if set count players
         if (chek)
@@ -286,6 +282,11 @@ public class ControlerMutliplayerGame : MonoBehaviour {
                 Interface.GetIterface().ShowCloseMassageBox(true, "Please select color");
                 return;
             }
+            if (!chekSetColor(color))
+            {
+                Interface.GetIterface().ShowCloseMassageBox(true, "Wrong  color");
+                return;
+            }
             Game.getGame()[Index - 1].namePlayer = name;
             Debug.Log("Name " + Game.getGame()[Index - 1].namePlayer);
 
@@ -307,10 +308,7 @@ public class ControlerMutliplayerGame : MonoBehaviour {
     {
         Interface.GetIterface().ShowCloseMassageBox(false);
     }
-
-
-
-
+ 
     /*This methods for set rotate buttons when colors set or no*/
     private void setRotateButton()
     {
@@ -350,7 +348,6 @@ public class ControlerMutliplayerGame : MonoBehaviour {
      * if flag-false closeMessageBox
     
         */
-    
     private void seachAndChangeScaleOfColorButon(string colors, bool flAG)
     {
         foreach (Button b in ButtonList)
@@ -360,8 +357,6 @@ public class ControlerMutliplayerGame : MonoBehaviour {
 
         }
     }
-
-
     private void Go()
     {
         SceneManager.LoadScene("Game");

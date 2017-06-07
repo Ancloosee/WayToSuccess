@@ -41,6 +41,7 @@ abstract public class Player
     abstract public void sell(BoardElements elements);
     abstract public bool chekLive();
 
+
 }
 
 public class RealPlayer : Player
@@ -54,6 +55,11 @@ public class RealPlayer : Player
     public override int makeMove(int step)
     {
         this.RealTimePosition += step;
+        //fix bugs
+        if(this.RealTimePosition>40)
+        {
+            this.RealTimePosition -= 40;
+        }
         return this.RealTimePosition;
     }
     public override bool buy(BoardElements boardElements)

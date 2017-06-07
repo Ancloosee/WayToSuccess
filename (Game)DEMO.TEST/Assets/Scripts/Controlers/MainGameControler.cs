@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MainGameControler : MonoBehaviour
 {
     private int index = 0;
-
+    bool chek = true;
     List<BoardElements> boardElements = new List<BoardElements>();
     public void Start()
     {
@@ -27,8 +27,6 @@ public class MainGameControler : MonoBehaviour
         initPlayersInFirsCase();
         Interface.GetIterface().changeTextPlayer(index);
     }
-
-
     private void initBoardElements()
     {
     ///1SIDE
@@ -64,7 +62,7 @@ public class MainGameControler : MonoBehaviour
         //15
         boardElements.Add(new BoardElements("The Auditorium", @"BoardElements\15", boardProterty: new BoardProperty(160)));
         //16
-        boardElements.Add(new BoardElements("Silver Van", @"BoardElements\16", boardPayOnly: new BoardPayOnly(200)));
+        boardElements.Add(new BoardElements("Silver Van", @"BoardElements\16", boardSingleProperty: new BoardSingleProperty(200)));
         //17
         boardElements.Add(new BoardElements("The Gym", @"BoardElements\17", boardProterty: new BoardProperty(160)));
         //18
@@ -202,92 +200,99 @@ public class MainGameControler : MonoBehaviour
             GameObject.Find("InformationAboutPlayer" + (i + 1)).GetComponent<Button>().onClick.AddListener(()=> Interface.GetIterface().showPanelInformation(p));
         }
     }
-
     private void makeMove()
     {
-       
-        //delete players from the current position
-        boardElements[Game.getGame()[index].RealTimePosition].playersInTheCase.Remove(Game.getGame()[index].LogoPlayer);
-        int local = Game.getGame()[index].makeMove(Game.getGame().Step);
-        boardElements[local].playersInTheCase.Add(Game.getGame()[index].LogoPlayer);
-        boardElements[local].setPositionsInTheCase();
-        //BOARD PROPERTY
-
-        if (boardElements[local].boardProterty != null)
+        if (!Game.getGame().isGameOver())
         {
-            Interface.GetIterface().createPanelForProperty(boardElements[local]);
-            if (boardElements[local].boardProterty.isOwner == false)
+
+            //delete players from the current position
+            boardElements[Game.getGame()[index].RealTimePosition].playersInTheCase.Remove(Game.getGame()[index].LogoPlayer);
+            int local = Game.getGame()[index].makeMove(Game.getGame().Step);
+            boardElements[local].playersInTheCase.Add(Game.getGame()[index].LogoPlayer);
+            boardElements[local].setPositionsInTheCase();
+            //BOARD PROPERTY
+
+            if (boardElements[local].boardProterty != null)
             {
-                GameObject.Find("BoardElementBuyButton").GetComponent<Button>().onClick.AddListener(Buy);
-            }
-            else
-            {
-                if (Game.getGame()[index].namePlayer == boardElements[local].boardProterty.OwnerName)
+                Interface.GetIterface().createPanelForProperty(boardElements[local]);
+                if (boardElements[local].boardProterty.isOwner == false)
                 {
-                    GameObject.Find("BoardElementsPayorUpdateButtonText").GetComponent<Text>().text = "Update";
-                    GameObject.Find("BoardElementPayorUpdateButton").GetComponent<Button>().onClick.AddListener(Upd);
-                    GameObject.Find("BoardElementSellButton").GetComponent<Button>().enabled = true;
-                    GameObject.Find("BoardElementSellButton").GetComponent<Button>().onClick.AddListener(sell);
-                    GameObject.Find("BoardElementSellButtonText").GetComponent<Text>().enabled = true;
+                    GameObject.Find("BoardElementBuyButton").GetComponent<Button>().onClick.AddListener(Buy);
+                    GameObject.Find("BoardElementSkipButton").GetComponent<Button>().onClick.AddListener(skip);
                 }
                 else
                 {
-                    GameObject.Find("BoardElementsPayorUpdateButtonText").GetComponent<Text>().text = "Pay rent";
-                    GameObject.Find("BoardElementPayorUpdateButton").GetComponent<Button>().onClick.AddListener(payRent);
+                    if (Game.getGame()[index].namePlayer == boardElements[local].boardProterty.OwnerName)
+                    {
+                        GameObject.Find("BoardElementsPayorUpdateButtonText").GetComponent<Text>().text = "Update";
+                        GameObject.Find("BoardElementPayorUpdateButton").GetComponent<Button>().onClick.AddListener(Upd);
+                        GameObject.Find("BoardElementSellButton").GetComponent<Button>().enabled = true;
+                        GameObject.Find("BoardElementSellButton").GetComponent<Button>().onClick.AddListener(sell);
+                        GameObject.Find("BoardElementSellButtonText").GetComponent<Text>().enabled = true;
+                    }
+                    else
+                    {
+                        GameObject.Find("BoardElementsPayorUpdateButtonText").GetComponent<Text>().text = "Pay rent";
+                        GameObject.Find("BoardElementPayorUpdateButton").GetComponent<Button>().onClick.AddListener(payRent);
 
+                    }
                 }
+
             }
-
-        }
-        //BOARD PAYONLY
-        else if (boardElements[local].boardPayOnly != null)
-        {
-            Interface.GetIterface().createPanelForPayOnly(boardElements[local]);
-            GameObject.Find("BoardElementPayButton").GetComponent<Button>().onClick.AddListener(PayOnly);
-
-        }
-        //BOARD CARD
-        else if (boardElements[local].boardCard != null)
-        {
-            Interface.GetIterface().createPanelCard(boardElements[local]);
-            GameObject.Find("BoardElementDoButton").GetComponent<Button>().onClick.AddListener(doAction);
-
-        }
-        //BOARD SINGLE PROPERTY
-        else if (boardElements[local].boardSingleProperty != null)
-        {
-            Interface.GetIterface().createPanelForSingleProperty(boardElements[local]);
-
-            if (boardElements[local].boardSingleProperty.isOwner == false)
+            //BOARD PAYONLY
+            else if (boardElements[local].boardPayOnly != null)
             {
-                GameObject.Find("BoardElementBuyButton").GetComponent<Button>().onClick.AddListener(Buy);
+                Interface.GetIterface().createPanelForPayOnly(boardElements[local]);
+                GameObject.Find("BoardElementPayButton").GetComponent<Button>().onClick.AddListener(PayOnly);
+
             }
-            else
+            //BOARD CARD
+            else if (boardElements[local].boardCard != null)
             {
-                if (Game.getGame()[index].namePlayer == boardElements[local].boardSingleProperty.OwnerName)
+                Interface.GetIterface().createPanelCard(boardElements[local]);
+                chek = true;
+                GameObject.Find("newDoButton").GetComponent<Button>().onClick.AddListener(doActions);
+
+                // GameObject.Find("BoardElementDoButton").GetComponent<Button>().onClick.AddListener(delegate { Interface.GetIterface().showRandCard(boardElements[local]);});
+                // doAction();
+
+            }
+            //BOARD SINGLE PROPERTY
+            else if (boardElements[local].boardSingleProperty != null)
+            {
+                Interface.GetIterface().createPanelForSingleProperty(boardElements[local]);
+
+                if (boardElements[local].boardSingleProperty.isOwner == false)
                 {
-                    GameObject.Find("BoardElementsBuyButtonText").GetComponent<Text>().text = "Skip";
-                    GameObject.Find("BoardElementBuyButton").GetComponent<Button>().onClick.AddListener(skip);
-                    GameObject.Find("BoardElementSellButton").GetComponent<Button>().enabled = true;
-                    GameObject.Find("BoardElementSellButton").GetComponent<Button>().onClick.AddListener(sell);
-                    GameObject.Find("BoardElementSellButtonText").GetComponent<Text>().enabled = true;
+                    GameObject.Find("BoardElementBuyButton").GetComponent<Button>().onClick.AddListener(Buy);
+                    GameObject.Find("BoardElementSkipButton").GetComponent<Button>().onClick.AddListener(skip);
                 }
                 else
                 {
-                    GameObject.Find("BoardElementsBuyButtonText").GetComponent<Text>().text = "Pay rent";
-                    GameObject.Find("BoardElementBuyButton").GetComponent<Button>().onClick.AddListener(payRent);
+                    if (Game.getGame()[index].namePlayer == boardElements[local].boardSingleProperty.OwnerName)
+                    {
+                        GameObject.Find("BoardElementsBuyButtonText").GetComponent<Text>().text = "Skip";
+                        GameObject.Find("BoardElementBuyButton").GetComponent<Button>().onClick.AddListener(skip);
+                        GameObject.Find("BoardElementSellButton").GetComponent<Button>().enabled = true;
+                        GameObject.Find("BoardElementSellButton").GetComponent<Button>().onClick.AddListener(sell);
+                        GameObject.Find("BoardElementSellButtonText").GetComponent<Text>().enabled = true;
+                    }
+                    else
+                    {
+                        GameObject.Find("BoardElementsBuyButtonText").GetComponent<Text>().text = "Pay rent";
+                        GameObject.Find("BoardElementBuyButton").GetComponent<Button>().onClick.AddListener(payRent);
 
+                    }
                 }
             }
-        }
-        else
-        {
-            Interface.GetIterface().showInformationAboutBoardElemets(boardElements[local]);
-            skip();
-        }
+            else
+            {
+                Interface.GetIterface().showInformationAboutBoardElemets(boardElements[local]);
+                skip();
+            }
 
-
-       
+            Game.getGame().chekBanclotsPlayer();
+        }
     }
     private void checkIndex()
     {
@@ -301,8 +306,7 @@ public class MainGameControler : MonoBehaviour
             Game.getGame()[i].LogoPlayer = GameObject.Find("Player" + (i + 1));
         }
     }
-
-   private void  initPlayersInFirsCase()
+    private void  initPlayersInFirsCase()
     {
         for (int i = 0; i <Game.getGame().numberOfPlayers ; i++)
         {
@@ -310,7 +314,6 @@ public class MainGameControler : MonoBehaviour
         }
         boardElements[0].setPositionsInTheCase();
     }
-
     private void Buy()
     {
         if(!Game.getGame()[index].buy(boardElements[Game.getGame()[index].RealTimePosition]))
@@ -366,40 +369,57 @@ public class MainGameControler : MonoBehaviour
         checkIndex();
         Interface.GetIterface().closeInformationAboutBoardElements();
         Interface.GetIterface().changeTextPlayer(index);
+
         Game.getGame().chekTrow = true;
     }
-    private void doAction()
+    private void doActions()
     {
-        int ID = System.Convert.ToInt32(GameObject.Find("BoardElementsIDCardText").GetComponent<Text>().text);
-        int oldPos = Game.getGame()[index].RealTimePosition;
-        Game.getGame()[index].doAction(ID, boardElements[Game.getGame()[index].RealTimePosition]);
-
-        if(ID==1)
+        if (chek == true)
         {
-            boardElements[oldPos].playersInTheCase.Remove(Game.getGame()[index].LogoPlayer);
-            boardElements[0].playersInTheCase.Add(Game.getGame()[index].LogoPlayer);
-            boardElements[0].setPositionsInTheCase();
-        }
-       else if(ID==7)
-        {
-            boardElements[oldPos].playersInTheCase.Remove(Game.getGame()[index].LogoPlayer);
-            boardElements[10].playersInTheCase.Add(Game.getGame()[index].LogoPlayer);
-            boardElements[10].setPositionsInTheCase();
-        }
-        else if(ID==6)
-        {
-            index--;
-        }
-
-      //  GameObject.Find("BoardElementDoButton").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("BoardElementDoButton").GetComponent<Button>().onClick.AddListener(skip);
-        //skip();
-        //  Interface.GetIterface().closeInformationAboutBoardElements();
-        MonoBehaviour.Destroy(GameObject.Find("BoardElementsIDCardText"));
-        Interface.GetIterface().changeTextPlayer(index);
+            int ID = System.Convert.ToInt32(GameObject.Find("BoardElementsIDCardText").GetComponent<Text>().text);
+            int oldPos = Game.getGame()[index].RealTimePosition;
         
+            Game.getGame()[index].doAction(ID, boardElements[Game.getGame()[index].RealTimePosition]);
+
+            if (ID == 1)
+            {
+                boardElements[oldPos].playersInTheCase.Remove(Game.getGame()[index].LogoPlayer);
+                boardElements[0].playersInTheCase.Add(Game.getGame()[index].LogoPlayer);
+                Game.getGame()[index].RealTimePosition = 0;
+                boardElements[0].setPositionsInTheCase();
+            }
+            else if (ID == 7)
+            {
+                boardElements[oldPos].playersInTheCase.Remove(Game.getGame()[index].LogoPlayer);
+                boardElements[10].playersInTheCase.Add(Game.getGame()[index].LogoPlayer);
+                //fix bug
+                Game.getGame()[index].RealTimePosition = 10;
+                boardElements[10].setPositionsInTheCase();
+            }
+            else if (ID == 6)
+            {
+                index--;
+            }
 
 
+            Interface.GetIterface().closeInformationAboutBoardElements();
+            Interface.GetIterface().returnAnchors();
+
+            GameObject.Find("newDoButton").GetComponent<Button>().enabled = false;
+            GameObject.Find("newDoButtonText").GetComponent<Text>().enabled = false;
+            MonoBehaviour.Destroy(GameObject.Find("BoardElementsIDCardText"));
+
+            index++;
+            checkIndex();
+
+            Interface.GetIterface().changeTextPlayer(index);
+
+            Game.getGame().chekTrow = true;
+
+
+            chek = false;
+
+        }
     }
     private void sell()
     {
@@ -411,11 +431,4 @@ public class MainGameControler : MonoBehaviour
         Interface.GetIterface().closeInformationAboutBoardElements();
         Game.getGame().chekTrow = true;
     }
-
-
-
-
-
-
-
 }
